@@ -1,0 +1,19 @@
+{
+  "name": "todo-checklist",
+  "version": "1.0.0",
+  "description": "A small ToDo-Checklist",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xderfred/ToDo-Checklist.git"
+  },
+  "author": "xDerFred",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xderfred/ToDo-Checklist/issues"
+  },
+  "homepage": "https://github.com/xderfred/ToDo-Checklist#readme"
+}
