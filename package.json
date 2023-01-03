@@ -4,7 +4,7 @@
   "description": "A small ToDo-Checklist",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/xderfred/ToDo-Checklist/issues"
   },
-  "homepage": "https://github.com/xderfred/ToDo-Checklist#readme"
+  "homepage": "https://github.com/xderfred/ToDo-Checklist#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
 }
