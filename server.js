@@ -5,7 +5,13 @@ const PORT = 3000;
 const app = express();
 
 app.use(express.json())
+app.use(express.static('public'));
 
+
+// index.html as startpage
+app.get("/", function(req, res) {
+    res.sendFile('index.html', {root: './views'});
+})
 
 // Endpoints for API calls to Database
 app.get("/api/getOpenTodos", (req, res) => {
