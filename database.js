@@ -11,9 +11,22 @@ const db = new sqlite3.Database("db.sqlite", (err) => {
     }
   });
 
-db.run(`CREATE TABLE IF NOT EXISTS todo(
+db.run(`CREATE TABLE IF NOT EXISTS open(
                                         id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
-                                        content TEXT
+                                        title TEXT,
+                                        description TEXT,
+                                        important BOOL
+                                        );`, (err) => {
+                                            if (err) {
+                                                console.log("ERROR DATABASE:", err)
+                                            }
+                                        });
+
+db.run(`CREATE TABLE IF NOT EXISTS done(
+                                        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
+                                        title TEXT,
+                                        description TEXT,
+                                        important BOOL
                                         );`, (err) => {
                                             if (err) {
                                                 console.log("ERROR DATABASE:", err)
@@ -21,8 +34,8 @@ db.run(`CREATE TABLE IF NOT EXISTS todo(
                                         });
 
 
-function getTodoList(callback) {
-    db.all("SELECT * FROM todo", (err, res) => {
+function getOpenTodos(callback) {
+    db.all("SELECT * FROM open", (err, res) => {
         if(err) {
             console.log("ERROR SELECT:", err)
             callback({error: true})
@@ -32,8 +45,32 @@ function getTodoList(callback) {
     });
 }
 
-function getTask(taskId, callback) {
-    db.get("SELECT content FROM todo WHERE id=($task)", {
+function getDoneTodos(callback) {
+    db.all("SELECT * FROM done", (err, res) => {
+        if(err) {
+            console.log("ERROR SELECT:", err)
+            callback({error: true})
+        } else {
+            callback(res);
+        }
+    });
+}
+
+function getOpenTask(taskId, callback) {
+    db.get("SELECT * FROM open WHERE id=($task)", {
+        $task: taskId
+    }, (err, res) => {
+        if(err) {
+            console.log("ERROR SELECT SINGLE:", err)
+            callback({error: true})
+        } else {
+            callback(res);
+        }
+    });
+}
+
+function getDoneTask(taskId, callback) {
+    db.get("SELECT * FROM done WHERE id=($task)", {
         $task: taskId
     }, (err, res) => {
         if(err) {
@@ -46,8 +83,10 @@ function getTask(taskId, callback) {
 }
 
 function addTask(taskContent, callback) {
-    db.run("INSERT INTO todo VALUES (NULL, $task)", {
-        $task: taskContent
+    db.run("INSERT INTO open VALUES (NULL, $title, $description, $important)", {
+        $title: taskContent.title,
+        $description: taskContent.description,
+        $important: taskContent.important
     }, (err) => {
         if(err) {
             console.log("ERROR SELECT SINGLE:", err)
@@ -58,8 +97,24 @@ function addTask(taskContent, callback) {
     });
 }
 
-function deleteTask(taskId, callback) {
-    db.run("DELETE FROM todo WHERE id=($task)", {
+function updateTask(taskContent, callback) {
+    db.run("UPDATE open SET title=($content), description=($description), important=($important) WHERE id=($id)" , {
+        $content: taskContent.content,
+        $description: taskContent.description,
+        $important: taskContent.important,
+        $id: taskContent.id
+    }, (err) => {
+        if(err) {
+            console.log("ERROR SELECT SINGLE:", err)
+            callback({error: true})
+        } else {
+            callback({error: false});
+        }
+    })
+}
+
+function deleteOpenTask(taskId, callback) {
+    db.run("DELETE FROM open WHERE id=($task)", {
         $task: taskId
     }, (err) => {
         if(err) {
@@ -71,8 +126,87 @@ function deleteTask(taskId, callback) {
     });
 }
 
+function deleteDoneTask(taskId, callback) {
+    db.run("DELETE FROM done WHERE id=($task)", {
+        $task: taskId
+    }, (err) => {
+        if(err) {
+            console.log("ERROR SELECT SINGLE:", err)
+            callback({error: true})
+        } else {
+            callback({error: false});
+        }
+    });
+}
+
+function completeTask(taskId, callback) {
+    getOpenTask(taskId, (res) => {
+        db.run("INSERT INTO done VALUES (NULL, $title, $description, $important)", {
+            $title: res.title,
+            $description: res.description,
+            $important: res.important
+        }, (err) => {
+            db.run("DELETE FROM open WHERE task=$task", {
+                $task: taskId
+            }, (err) => {
+                if(err) {
+                    console.log("ERROR SELECT SINGLE:", err)
+                    callback({error: true})
+                } else {
+                    callback({error: false});
+                }
+            })
+    
+            if(err) {
+                console.log("ERROR SELECT SINGLE:", err)
+                callback({error: true})
+            } else {
+                callback({error: false});
+            }
+        });
+    }) 
+}
+
+function reopenTask(taskId, callback) {
+    getDoneTask(taskId, (res) => {
+        db.run("INSERT INTO open VALUES (NULL, $title, $description, $important)", {
+            $title: res.title,
+            $description: res.description,
+            $important: res.important
+        }, (err) => {
+            db.run("DELETE FROM done WHERE task=$task", {
+                $task: taskId
+            }, (err) => {
+                if(err) {
+                    console.log("ERROR SELECT SINGLE:", err)
+                    callback({error: true})
+                } else {
+                    callback({error: false});
+                }
+            })
+    
+            if(err) {
+                console.log("ERROR SELECT SINGLE:", err)
+                callback({error: true})
+            } else {
+                callback({error: false});
+            }
+        });
+    }) 
+}
+
+
 
 module.exports = {
     // Export all functions to use in the server.js
-    getTodoList, getTask, addTask, deleteTask
+    getOpenTodos, 
+    getDoneTodos, 
+    getOpenTask, 
+    getDoneTask,
+    addTask, 
+    updateTask,
+    deleteOpenTask, 
+    deleteDoneTask,
+    completeTask,
+    reopenTask
 };
