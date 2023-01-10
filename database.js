@@ -33,7 +33,6 @@ db.run(`CREATE TABLE IF NOT EXISTS done(
                                             }
                                         });
 
-
 function getOpenTodos(callback) {
     db.all("SELECT * FROM open", (err, res) => {
         if(err) {
@@ -57,7 +56,7 @@ function getDoneTodos(callback) {
 }
 
 function getOpenTask(taskId, callback) {
-    db.get("SELECT * FROM open WHERE id=($task)", {
+    db.all("SELECT * FROM open WHERE id=($task)", {
         $task: taskId
     }, (err, res) => {
         if(err) {
@@ -70,7 +69,7 @@ function getOpenTask(taskId, callback) {
 }
 
 function getDoneTask(taskId, callback) {
-    db.get("SELECT * FROM done WHERE id=($task)", {
+    db.all("SELECT * FROM done WHERE id=($task)", {
         $task: taskId
     }, (err, res) => {
         if(err) {
@@ -97,12 +96,12 @@ function addTask(taskContent, callback) {
     });
 }
 
-function updateTask(taskContent, callback) {
-    db.run("UPDATE open SET title=($content), description=($description), important=($important) WHERE id=($id)" , {
-        $content: taskContent.content,
+function updateTask(taskId, taskContent, callback) {
+    db.run("UPDATE open SET title=($title), description=($description), important=($important) WHERE id=($id)" , {
+        $title: taskContent.title,
         $description: taskContent.description,
         $important: taskContent.important,
-        $id: taskContent.id
+        $id: taskId
     }, (err) => {
         if(err) {
             console.log("ERROR SELECT SINGLE:", err)
@@ -141,27 +140,23 @@ function deleteDoneTask(taskId, callback) {
 
 function completeTask(taskId, callback) {
     getOpenTask(taskId, (res) => {
+        console.log("res", res);
         db.run("INSERT INTO done VALUES (NULL, $title, $description, $important)", {
-            $title: res.title,
-            $description: res.description,
-            $important: res.important
+            $title: res[0].title,
+            $description: res[0].description,
+            $important: res[0].important
         }, (err) => {
-            db.run("DELETE FROM open WHERE task=$task", {
-                $task: taskId
-            }, (err) => {
-                if(err) {
-                    console.log("ERROR SELECT SINGLE:", err)
-                    callback({error: true})
-                } else {
-                    callback({error: false});
-                }
-            })
-    
             if(err) {
                 console.log("ERROR SELECT SINGLE:", err)
                 callback({error: true})
             } else {
-                callback({error: false});
+                deleteOpenTask(taskId, (res) => {
+                    if (res.error) {
+                        callback({error: true})
+                    } else {
+                        callback({error: false})
+                    }
+                })       
             }
         });
     }) 
@@ -170,31 +165,25 @@ function completeTask(taskId, callback) {
 function reopenTask(taskId, callback) {
     getDoneTask(taskId, (res) => {
         db.run("INSERT INTO open VALUES (NULL, $title, $description, $important)", {
-            $title: res.title,
-            $description: res.description,
-            $important: res.important
+            $title: res[0].title,
+            $description: res[0].description,
+            $important: res[0].important
         }, (err) => {
-            db.run("DELETE FROM done WHERE task=$task", {
-                $task: taskId
-            }, (err) => {
-                if(err) {
-                    console.log("ERROR SELECT SINGLE:", err)
-                    callback({error: true})
-                } else {
-                    callback({error: false});
-                }
-            })
-    
             if(err) {
                 console.log("ERROR SELECT SINGLE:", err)
                 callback({error: true})
             } else {
-                callback({error: false});
-            }
+                deleteDoneTask(taskId, (res) => {
+                    if (res.error) {
+                        callback({error: true})
+                    } else {
+                        callback({error: false})
+                    }
+                })       
+            } 
         });
     }) 
 }
-
 
 
 module.exports = {

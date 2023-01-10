@@ -17,7 +17,7 @@ app.get("/", function(req, res) {
 app.get("/api/getOpenTodos", (req, res) => {
     sqlite.getOpenTodos( (tasks) => {
         if (tasks.error === true) {
-            res.status(500)
+            res.status(500).send(tasks)
         }
 
         console.log("tasks", tasks)
@@ -28,7 +28,7 @@ app.get("/api/getOpenTodos", (req, res) => {
 app.get("/api/getDoneTodos", (req, res) => {
     sqlite.getDoneTodos( (tasks) => {
         if (tasks.error === true) {
-            res.status(500)
+            res.status(500).send(task)
         }
 
         console.log("tasks", tasks)
@@ -37,13 +37,11 @@ app.get("/api/getDoneTodos", (req, res) => {
 })
 
 app.get("/api/getOpenTask/:id", (req, res) => {
-    const id = req.params.id
+    const id = req.params.id;
 
     sqlite.getOpenTask(id, (task) => {
-        console.log("task", task)
-        
         if (task.error === true) {
-            res.status(500)
+            res.status(500).json(task)
         }
 
         console.log("task", task)
@@ -55,10 +53,8 @@ app.get("/api/getDoneTask/:id", (req, res) => {
     const id = req.params.id
 
     sqlite.getDoneTask(id, (task) => {
-        console.log("task", task)
-        
         if (task.error === true) {
-            res.status(500)
+            res.status(500).json(task)
         }
 
         console.log("task", task)
@@ -67,94 +63,81 @@ app.get("/api/getDoneTask/:id", (req, res) => {
 })
 
 app.post("/api/addTask", (req, res) => {
-    const content = req.body.content;
+    const content = req.body;
 
-    console.log("content", content);
-    // Add the new task from the post route.
     sqlite.addTask(content, (result) => {
         if (result.error === true) {
-            res.status(500)
+            res.status(500).send(content)
         }
 
         console.log("result", result)
-        res.status(200)   
+        res.status(200).send(content)  
     });
 })
 
 app.delete("/api/deleteOpenTask/:id", (req, res) => {
     const id = req.params.id;
 
-    console.log("id", id)
     sqlite.deleteOpenTask(id, (result) => {
-        console.log("Result:", result);
         if (result.error === true) {
-            res.status(500)
+            res.status(500).send(id)
         }
 
         console.log("result", result)
-        res.status(200)  
+        res.status(200).send(id) 
     });
 })
 
 app.delete("/api/deleteDoneTask/:id", (req, res) => {
     const id = req.params.id;
 
-    console.log("id", id)
     sqlite.deleteDoneTask(id, (result) => {
-        console.log("Result:", result);
         if (result.error === true) {
-            res.status(500)
+            res.status(500).send(id)
         }
 
         console.log("result", result)
-        res.status(200)  
+        res.status(200).send(id)
     });
 })
 
 app.put("/api/updateTask/:id", (req, res) => {
     const id = req.params.id;
-    const content = req.body.content;
-    console.log("ID: ", id)
-    console.log("content: ", content)
+    const taskContent = req.body;
 
-    sqlite.updateTask(id, content, function(result) {
-        console.log("Result:", result);
+    sqlite.updateTask(id, taskContent, function(result) {
         if (result.error === true) {
-            res.status(500)
+            res.status(500).send(id)
         }
 
         console.log("result", result)
-        res.status(200)  
+        res.status(200).send(id)
     })
 })
 
-app.post("/api/completeTask/:id", (req, res) => {
+app.put("/api/completeTask/:id", (req, res) => {
     const id = req.params.id;
 
-    console.log("id", id);
-    
     sqlite.completeTask(id, (result) => {
         if (result.error === true) {
-            res.status(500)
+            res.status(500).send(id)
         }
 
         console.log("result", result)
-        res.status(200)   
+        res.status(200).send(id)
     });
 })
 
-app.post("/api/reopenTask/:id", (req, res) => {
+app.put("/api/reopenTask/:id", (req, res) => {
     const id = req.params.id;
 
-    console.log("id", id);
-    
     sqlite.reopenTask(id, (result) => {
         if (result.error === true) {
-            res.status(500)
+            res.status(500).send(id)
         }
 
         console.log("result", result)
-        res.status(200)   
+        res.status(200).send(id)
     });
 })
 
