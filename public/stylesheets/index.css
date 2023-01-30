@@ -1,0 +1,212 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    background-color: yellow;
+    height: 100vh;
+}
+
+header nav {
+    display: inline;
+}
+
+header nav a {
+    color: black;
+    margin-right: 10em;
+}
+
+.navigation {
+    background-color: white;
+    padding: 12px;
+    display: flex;
+    justify-content: end;
+}
+
+header .main-title {
+    display: grid;
+    grid-template-rows: 20rem 1rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 20em;
+    height: 21rem;
+    margin: 6em;
+}
+
+.main-header { 
+    grid-column-start: 1;
+    grid-column-end: span 5;
+    grid-row-start: 1;
+    grid-row-end: 1;
+    display: inline-grid;
+    font-size: 8rem;
+}
+
+.label-just {
+    grid-column: 1 / 2;
+    grid-row: 2 / 2;
+    text-align: center;
+}
+
+.label-keep {
+    grid-column: 2 / 3;
+    grid-row: 2 / 2;
+    text-align: center;
+    padding-left: 10px;
+}
+
+.label-track {
+    grid-column: 3 / 4;
+    grid-row: 2 / 2;
+    text-align: center;
+    padding-left: 12px;
+}
+
+/* The container */
+.container {
+    display: block;
+    position: relative;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Hide the browser's default checkbox */
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 8px;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .container:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .container input:checked ~ .checkmark {
+    background-color: white;
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .container .checkmark:after {
+    left: 12px;
+    bottom: 6px;
+    width: 12px;
+    height: 30px;
+    border: solid #343a40;
+    border-width: 0 3px 3px 0;
+    transform: rotate(40deg);
+  }
+
+.img-container {
+  overflow: hidden;
+  position: absolute;
+  right: 0px;
+  bottom: -200px;
+  height: 100%;
+  width: 1000px;
+  z-index: 5;
+}
+
+header img {
+  rotate: 40deg;
+    position: relative;
+    left: 500px;
+    top: 50px;
+    height: 100%;
+    z-index: 5;
+}
+
+hr {
+    z-index: 6;
+    position: relative;
+}
+
+main {
+    background-color: white;
+    height: 100vh;
+    z-index: 6;
+    position: relative;
+}
+
+footer {
+    background-color: yellow;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+footer h2 {
+  font-size: 4rem;
+}
+
+footer p {
+  font-size: 1.3rem;
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 70%;
+}
+
+.link-github {
+  text-align: center;
+}
+
+.link-github a img{
+  height: 80px;
+}
+
+.link-homepage a {
+  text-decoration: none;
+}
+
+.icon-homepage {
+  background-color: #24292F;
+  height: 80px;
+  width: 80px;
+  border-radius: 50px;
+  text-align: center;
+}
+
+.icon-h {
+  font-size: 50px;
+  color: white;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}

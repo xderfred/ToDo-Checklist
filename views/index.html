@@ -5,43 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToDO-Checklist</title>
+    <script type="text/javascript" src="/public/javascript/fetch.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="/public/stylesheets/index.css">
+    
 </head>
 <body>
     <header>
-        <button>
-            <section class="nav-icon"></section>
-        </button>
+        <div class="navigation">
         <nav>
             <a href="">Tutorial</a>
             <a href="">About</a>
         </nav>
+    </div>
         <hr>
-        <h1>What's Up?</h1>
-        <ul>
-            <li>
-                <label class="container">
-                    <input type="checkbox">
+        <div class="main-graphics">
+            <div class="main-title">
+                <h1 class="main-header">What's Up?</h1>
+                <label class="container label-just">
+                    <input type="checkbox" checked="true" disabled>
                     <span class="checkmark"></span>
                     Just.
-                  </label>
-            </li>
-            <li>
-                <label class="container">
-                    <input type="checkbox">
+                </label>
+                <label class="container label-keep">
+                    <input type="checkbox" checked="true" disabled>
                     <span class="checkmark"></span>
                     Keep.
-                  </label>
-            </li>
-            <li>
-                <label class="container">
-                    <input type="checkbox">
+                </label>
+                <label class="container label-track">
+                    <input type="checkbox" checked="true" disabled>
                     <span class="checkmark"></span>
                     Track.
-                  </label>
-            </li>
-        </ul>
-        <img src="imgs/clipboard.png" alt="clipboard">
+                </label>
+            </div>
+            <div class="img-container">
+                <img src="/public/imgs/clipboard.png" alt="clipboard">
+            </div>
+        </div>
     </header>
+    <hr>
     <main>
         <section class="label-done">Open</section>
         <section class="label-open">Done</section>
@@ -55,20 +56,23 @@
         <button>Add</button>
         <button>Remove</button>
     </main>
+    <hr>
     <footer>
         <h2>All Organised Up?</h2>
         <p>Feel Free To Check Out My</p>
-        <div class="link-github">
-            <p>Github</p>
-            <a href="https://github.com/xderfred"><img src="imgs/github-mark.png" alt="github-mark"></a>
-        </div>
-        <div class="link-homepage">
-            <p>Homepage</p>
-            <a href="#">
-                <section class="icon-homepage">
-                    <section class="icon-h">H</section>
-                </section>
-            </a>
+        <div class="links">
+            <div class="link-github">
+                <p>Github</p>
+                <a href="https://github.com/xderfred"><img src="/public/imgs/github-mark.png" alt="github-mark"></a>
+            </div>
+            <div class="link-homepage">
+                <p>Homepage</p>
+                <a href="#">
+                    <section class="icon-homepage">
+                        <section class="icon-h">H</section>
+                    </section>
+                </a>
+            </div>
         </div>
     </footer>
 </body>
