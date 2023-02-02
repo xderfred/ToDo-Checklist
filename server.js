@@ -5,8 +5,8 @@ const PORT = 3000;
 const app = express();
 
 app.use(express.json())
-app.use(express.static('public'));
-
+// app.use(express.static('public'));
+app.use("/public", express.static(__dirname + "/public"));
 
 // index.html as startpage
 app.get("/", function(req, res) {

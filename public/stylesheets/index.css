@@ -1,132 +1,119 @@
 * {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 header {
-    background-color: yellow;
-    height: 100vh;
+  background-color: yellow;
+  height: 100vh;
 }
 
 header nav {
-    display: inline;
+  display: inline;
 }
 
 header nav a {
-    color: black;
-    margin-right: 10em;
+  color: black;
+  margin-right: 10em;
 }
 
 .navigation {
-    background-color: white;
-    padding: 12px;
-    display: flex;
-    justify-content: end;
+  background-color: white;
+  padding: 12px;
+  display: flex;
+  justify-content: end;
 }
 
 header .main-title {
-    display: grid;
-    grid-template-rows: 20rem 1rem;
-    grid-template-columns: 1fr 1fr 1fr;
-    width: 20em;
-    height: 21rem;
-    margin: 6em;
+  display: grid;
+  grid-template-rows: 20rem 1rem;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 20em;
+  height: 21rem;
+  margin: 6em;
 }
 
 .main-header { 
-    grid-column-start: 1;
-    grid-column-end: span 5;
-    grid-row-start: 1;
-    grid-row-end: 1;
-    display: inline-grid;
-    font-size: 8rem;
+  grid-column-start: 1;
+  grid-column-end: span 5;
+  grid-row-start: 1;
+  grid-row-end: 1;
+  display: inline-grid;
+  font-size: 8rem;
 }
 
 .label-just {
-    grid-column: 1 / 2;
-    grid-row: 2 / 2;
-    text-align: center;
+  grid-column: 1 / 2;
+  grid-row: 2 / 2;
+  text-align: center;
 }
 
 .label-keep {
-    grid-column: 2 / 3;
-    grid-row: 2 / 2;
-    text-align: center;
-    padding-left: 10px;
+  grid-column: 2 / 3;
+  grid-row: 2 / 2;
+  text-align: center;
+  padding-left: 10px;
 }
 
 .label-track {
-    grid-column: 3 / 4;
-    grid-row: 2 / 2;
-    text-align: center;
-    padding-left: 12px;
+  grid-column: 3 / 4;
+  grid-row: 2 / 2;
+  text-align: center;
+  padding-left: 12px;
 }
 
-/* The container */
 .container {
-    display: block;
-    position: relative;
-    margin-bottom: 12px;
-    cursor: pointer;
-    font-size: 22px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-  
-  /* Hide the browser's default checkbox */
-  .container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  }
-  
-  /* Create a custom checkbox */
-  .checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #eee;
-    border-radius: 8px;
-  }
-  
-  /* On mouse-over, add a grey background color */
-  .container:hover input ~ .checkmark {
-    background-color: #ccc;
-  }
-  
-  /* When the checkbox is checked, add a blue background */
-  .container input:checked ~ .checkmark {
-    background-color: white;
-  }
-  
-  /* Create the checkmark/indicator (hidden when not checked) */
-  .checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-  }
-  
-  /* Show the checkmark when checked */
-  .container input:checked ~ .checkmark:after {
-    display: block;
-  }
-  
-  /* Style the checkmark/indicator */
-  .container .checkmark:after {
-    left: 12px;
-    bottom: 6px;
-    width: 12px;
-    height: 30px;
-    border: solid #343a40;
-    border-width: 0 3px 3px 0;
-    transform: rotate(40deg);
-  }
+  display: block;
+  position: relative;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.container .box {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+.checkmark {
+  left: 12px;
+  top: -12px;
+  width: 12px;
+  height: 30px;
+  border: solid #343a40;
+  border-width: 0 3px 3px 0;
+  transform: rotate(40deg);
+}
+
+.checkmark-absolute {
+  position: absolute;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.container .checkmark:after {
+  left: 12px;
+  bottom: 6px;
+  width: 12px;
+  height: 30px;
+  border: solid #343a40;
+  border-width: 0 3px 3px 0;
+  transform: rotate(40deg);
+}
 
 .img-container {
   overflow: hidden;
@@ -140,32 +127,132 @@ header .main-title {
 
 header img {
   rotate: 40deg;
-    position: relative;
-    left: 500px;
-    top: 50px;
-    height: 100%;
-    z-index: 5;
+  position: relative;
+  left: 500px;
+  top: 50px;
+  height: 100%;
+  z-index: 5;
 }
 
 hr {
-    z-index: 6;
-    position: relative;
+  z-index: 6;
+  position: relative;
 }
 
 main {
-    background-color: white;
-    height: 100vh;
-    z-index: 6;
-    position: relative;
+  background-color: white;
+  height: 100vh;
+  z-index: 6;
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.todo-window {
+  display: flex;
+  align-items: center;
+  height: 80%;
+  width: 70%;
+}
+
+.labels {
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-bottom: 1px solid black;
+  height: 50%;
+  border-radius: 10px 0 0 10px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(255, 255, 0, 0.4);
+}
+
+ul {
+  border: 1px solid black;
+  width: 100%;
+  height: 80%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container-tasks {
+  margin-right: 3rem;
+  margin-bottom: 20px;
+}
+
+.checkmark-tasks {
+  position: absolute;
+}
+
+.label-done, .label-open {
+  display: flex;
+  height: 50%;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.label-open {
+  border-top: 1px solid black;
+  border-radius: 10px 0 0 10px;
+  background-color: rgb(255, 255, 0, 0.8);
+}
+
+section p {
+  transform: rotate(-90deg);
+}
+
+.buttons p{
+  transform: rotate(90deg);
+}
+
+.buttons {
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.buttons button {
+  display: flex;
+  height: 40%;
+  width: 55px;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 10px;
+  background-color: yellow;
+  align-items: center;
+  font-size: 1.05em;
+  border: none;
+  box-shadow:  38px 38px 68px #c5c5c5,
+             -38px -38px 68px #fbfbfb;
+}
+
+li {
+  list-style-type: none;
+  display: flex;
+  width: 90%;
+  margin-top: 15px;
+  background-color: gainsboro;
+  height: 50px;
+  justify-content: space-between;
+  align-items: center;
+  outline: 1px solid black;
+  border-radius: 10px;
+}
+
+.task-name {
+  margin-left: 20px;
 }
 
 footer {
-    background-color: yellow;
-    height: 50vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
+  background-color: yellow;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 footer h2 {

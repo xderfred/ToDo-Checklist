@@ -22,18 +22,18 @@
             <div class="main-title">
                 <h1 class="main-header">What's Up?</h1>
                 <label class="container label-just">
-                    <input type="checkbox" checked="true" disabled>
-                    <span class="checkmark"></span>
+                    <span class="box"></span>
+                    <span class="checkmark checkmark-absolute"></span>
                     Just.
                 </label>
                 <label class="container label-keep">
-                    <input type="checkbox" checked="true" disabled>
-                    <span class="checkmark"></span>
+                    <span class="box"></span>
+                    <span class="checkmark checkmark-absolute"></span>
                     Keep.
                 </label>
                 <label class="container label-track">
-                    <input type="checkbox" checked="true" disabled>
-                    <span class="checkmark"></span>
+                    <span class="box"></span>
+                    <span class="checkmark checkmark-absolute"></span>
                     Track.
                 </label>
             </div>
@@ -44,17 +44,25 @@
     </header>
     <hr>
     <main>
-        <section class="label-done">Open</section>
-        <section class="label-open">Done</section>
-        <ul>
-            <li>
-                <p>Task1</p>
-                    <input type="checkbox">
-                    <span class="checkmark"></span>
-            </li>
-        </ul>
-        <button>Add</button>
-        <button>Remove</button>
+        <div class="todo-window">
+            <div class="labels">
+                <section class="label-done"><p>Open</p></section>
+                <section class="label-open"><p>Done</p></section>
+            </div>
+            <ul>
+                <li>
+                    <p class="task-name">Task1</p>
+                    <label class="container container-tasks">
+                        <span class="box"></span>
+                        <!-- <span class="checkmark checkmark-tasks"></span> -->
+                    </label>
+                </li>
+            </ul>
+        </div>
+        <div class="buttons">
+            <button><p>Add</p></button>
+            <button><p>Remove</p></button>
+        </div>
     </main>
     <hr>
     <footer>
